@@ -13,13 +13,8 @@ public class task1 {
         }
         System.out.println("The sum is: "+sumOfArr(myArr));
         System.out.println("The average is: "+avgOfArr(myArr));
-        System.out.println(maxAndMin(myArr));
-        boolean isPal = isPalindrome(myArr);
-        if (isPal){
-            System.out.println("The array is Palindrome");
-        }else{
-            System.out.println("The array isn't Palindrome");
-        }
+        maxOfArr(myArr);
+        minOfArr(myArr);
     }
 
     public static int sumOfArr(int[] array){
@@ -36,40 +31,32 @@ public class task1 {
         }
         return (double) theSum/array.length;
     }
-    public static int maxAndMin(int[] array){
+    public static int maxOfArr(int[] array) {
         int maxNum = array[0];
-        int minNum = array[0];
-        int secMax = array[1];
-        int secMin = array[1];
+        double second = Double.NEGATIVE_INFINITY;
         for (int i=0; i<array.length; i++){
-            if (array[i]>maxNum){
-                maxNum=array[i];
-            }
-            if (array[i]<minNum){
-                minNum=array[i];
-            }
-            if (array[i]>secMax && array[i]!=maxNum){
-                secMax = array[i];
-            }
-            if (array[i]<secMin && array[i]!=minNum){
-                secMin = array[i];
+            if (array[i]>maxNum)
+                maxNum = array[i];
+            for (int j=0; j<i; j++){
+                if (array[j]>second&&array[j]!=maxNum)
+                    second = array[j];
             }
         }
-        System.out.println("Max number: "+maxNum+"\nMin number: "+minNum);
-        if (array.length>1) {
-            System.out.println("Second largest: " + secMax + "\nsecond smallest: " + secMin);
-        }
+        System.out.println("Max number is: "+maxNum+"\nSecond max is: "+second);
         return 0;
     }
-    public static boolean isPalindrome(int[] arr){
-        double cycles = (double) arr.length /2;
-        int l = arr.length;
-        for (int i=0; i<cycles; i++){
-            if (arr[i]!=arr[l-1-i]){
-                return false;
+    public static int minOfArr(int[] array){
+        double second = Double.POSITIVE_INFINITY;
+        int minNum = array[0];
+        for (int i=0; i<array.length; i++){
+            if (array[i]<minNum)
+                minNum = array[i];
+            for (int j=0; j<i; j++){
+                if (array[j]<second&&array[j]!=minNum)
+                    second = array[j];
             }
         }
-        return true;
+        System.out.println("Min number is: "+minNum+"\nSecond min is: "+second);
+        return 0;
     }
-
 }
